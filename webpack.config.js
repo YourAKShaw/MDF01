@@ -1,24 +1,31 @@
-import { resolve as _resolve } from "path";
+import { fileURLToPath } from "url";
+import { dirname, resolve as _resolve } from "path";
 import nodeExternals from "webpack-node-externals";
 
-export const entry = "./src/server.ts";
-export const target = "node";
-export const externals = [nodeExternals()];
-export const mode = "development";
-export const module = {
-  rules: [
-    {
-      test: /\.ts$/,
-      use: "ts-loader",
-      exclude: /node_modules/,
-    },
-  ],
+// Recreate __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default {
+  entry: "./src/server.ts",
+  target: "node",
+  externals: [nodeExternals()],
+  mode: "development",
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  output: {
+    filename: "bundle.js",
+    path: _resolve(__dirname, "dist"),
+  },
+  watch: true,
 };
-export const resolve = {
-  extensions: [".ts", ".js"],
-};
-export const output = {
-  filename: "bundle.js",
-  path: _resolve(__dirname, "dist"),
-};
-export const watch = true;
