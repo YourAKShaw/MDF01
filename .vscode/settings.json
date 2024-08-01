@@ -12,6 +12,7 @@
     "swagger",
     "webpack",
     "product",
-    "category"
+    "category",
+    "webpack"
   ]
 }
