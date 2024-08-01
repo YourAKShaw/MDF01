@@ -26,6 +26,10 @@ export default {
   output: {
     filename: "bundle.js",
     path: _resolve(__dirname, "dist"),
+    libraryTarget: "module", // Use ES module output
+  },
+  experiments: {
+    outputModule: true, // Enable module output
   },
   watch: true,
 };
