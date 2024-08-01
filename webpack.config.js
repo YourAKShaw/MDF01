@@ -27,6 +27,7 @@ export default {
     filename: "bundle.js",
     path: _resolve(__dirname, "dist"),
     libraryTarget: "module", // Use ES module output
+    chunkFormat: "module", // Explicitly set the chunk format to module
   },
   experiments: {
     outputModule: true, // Enable module output
