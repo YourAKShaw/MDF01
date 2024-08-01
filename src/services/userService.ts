@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { UserModel, User } from "../models/userModel";
+import { UserModel, User } from "../models/User";
 
 export class UserService {
   static async register(
