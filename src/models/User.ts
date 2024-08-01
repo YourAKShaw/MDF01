@@ -1,6 +1,7 @@
 import { RowDataPacket } from "mysql2/promise";
 import pool from "../utils/db";
 import bcrypt from "bcrypt";
+import logger from "../utils/logger";
 
 export interface User {
   id?: number;
@@ -34,10 +35,17 @@ export class UserModel {
 
   static async create(user: User): Promise<void> {
     const hashedPassword = await bcrypt.hash(user.password, 10);
-    await pool.query(
-      "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-      [user.username, user.email, hashedPassword]
-    );
+    try {
+      await pool.query(
+        "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+        [user.username, user.email, hashedPassword]
+      );
+      logger.success(`Successfully inserted user ${user.username}`);
+    } catch (error) {
+      logger.error("Error inserting user:", error);
+      logger.debug(error);
+      throw error;
+    }
   }
 
   static async updateProfile(id: number, user: Partial<User>): Promise<void> {
