@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "npm",
-    "vscode"
+    "vscode",
+    "config"
   ]
 }
