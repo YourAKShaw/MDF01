@@ -10,8 +10,8 @@ const app = express();
 setupSwagger(app);
 
 app.use(bodyParser.json());
-app.use("/products", productRoutes);
-app.use("/categories", categoryRoutes);
 app.use("/users", userRoutes);
+app.use("/api", productRoutes);
+app.use("/api", categoryRoutes);
 
 export default app;
