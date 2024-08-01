@@ -1,0 +1,12 @@
+{
+  "name": "mdf01",
+  "version": "1.0.0",
+  "description": "A RESTful API for a simple e-commerce application using Node.js and MySQL. This API should manage products, categories, and user authentication.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
