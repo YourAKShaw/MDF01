@@ -2,6 +2,12 @@
   "conventionalCommits.scopes": [
     "npm",
     "vscode",
-    "config"
+    "config",
+    "env",
+    "mysql",
+    "user",
+    "routes",
+    "app",
+    "server"
   ]
 }
