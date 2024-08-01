@@ -8,6 +8,7 @@
     "user",
     "routes",
     "app",
-    "server"
+    "server",
+    "swagger"
   ]
 }
