@@ -13,6 +13,7 @@
     "webpack",
     "product",
     "category",
-    "webpack"
+    "webpack",
+    "log"
   ]
 }
