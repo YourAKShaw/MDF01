@@ -1,37 +1,31 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { UserModel, User } from "../models/User";
+import bcrypt from "bcrypt";
 
 export class UserService {
-  static async register(
-    username: string,
-    email: string,
-    password: string
-  ): Promise<void> {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser: User = { username, email, password: hashedPassword };
-    await UserModel.create(newUser);
+  static async register(user: User): Promise<void> {
+    await UserModel.create(user);
   }
 
-  static async login(email: string, password: string): Promise<string | null> {
-    const user = await UserModel.findByEmail(email);
-    if (!user) {
-      return null;
+  static async login(email: string, password: string): Promise<User | null> {
+    const user = await UserModel.getByEmail(email);
+    if (user && (await bcrypt.compare(password, user.password))) {
+      return user;
     }
+    return null;
+  }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return null;
-    }
+  static async getUserProfile(id: number): Promise<User | null> {
+    return await UserModel.getById(id);
+  }
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET as string,
-      {
-        expiresIn: "1h",
-      }
-    );
+  static async updateUserProfile(
+    id: number,
+    user: Partial<User>
+  ): Promise<void> {
+    await UserModel.updateProfile(id, user);
+  }
 
-    return token;
+  static async updateUserPassword(id: number, password: string): Promise<void> {
+    await UserModel.updatePassword(id, password);
   }
 }
