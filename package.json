@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A RESTful API for a simple e-commerce application using Node.js and MySQL. This API should manage products, categories, and user authentication.",
   "main": "server.ts",
-  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
