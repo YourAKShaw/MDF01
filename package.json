@@ -4,7 +4,10 @@
   "description": "A RESTful API for a simple e-commerce application using Node.js and MySQL. This API should manage products, categories, and user authentication.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "start": "node dist/bundle.js",
+    "dev": "nodemon dist/bundle.js",
+    "dev:build": "webpack --watch"
   },
   "keywords": [],
   "author": "YourAKShaw",
