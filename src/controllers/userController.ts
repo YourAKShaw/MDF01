@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { UserService } from "../services/userService";
 import { User } from "../models/User";
 import ApiResponse from "../utils/ApiResponse";
+import logger from "../utils/logger";
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { username, email, password } = req.body;
@@ -29,14 +30,41 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const user = await UserService.login(email, password);
     if (!user) {
-      res.status(401).json({ message: "Invalid credentials" });
+      logger.error(`Invalid credentials for user.email ${email}`);
+      res.status(401).json(
+        new ApiResponse({
+          statusCode: 401,
+          success: false,
+          message: "Invalid credentials",
+          data: null,
+          errors: [],
+        })
+      );
       return;
     }
 
+    logger.success(`Login for user.email ${email} successful`);
+
     // Here you would typically generate and return a JWT token
-    res.json({ message: "Login successful" });
+    res.status(200).json(
+      new ApiResponse({
+        statusCode: 200,
+        success: true,
+        message: "Login successful",
+        data: null,
+        errors: [],
+      })
+    );
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json(
+      new ApiResponse({
+        statusCode: 500,
+        success: false,
+        message: "Internal Server Error",
+        data: null,
+        errors: [error],
+      })
+    );
   }
 };
 
