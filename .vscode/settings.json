@@ -15,6 +15,7 @@
     "category",
     "webpack",
     "log",
-    "ascii"
+    "ascii",
+    "api"
   ]
 }
