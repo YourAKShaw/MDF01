@@ -16,6 +16,7 @@
     "webpack",
     "log",
     "ascii",
-    "api"
+    "api",
+    "todo"
   ]
 }
