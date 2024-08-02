@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { UserService } from "../services/userService";
 import { User } from "../models/User";
+import ApiResponse from "../utils/ApiResponse";
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { username, email, password } = req.body;
@@ -8,7 +9,15 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const newUser: User = { username, email, password };
     await UserService.register(newUser);
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json(
+      new ApiResponse({
+        statusCode: 201,
+        success: true,
+        message: "User registered successfully",
+        data: null,
+        errors: [],
+      })
+    );
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
   }
