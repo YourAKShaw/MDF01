@@ -45,7 +45,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     logger.success(`Login for user.email ${email} successful`);
 
-    // Here you would typically generate and return a JWT token
+    // TODO: Here you would typically generate and return a JWT token
     res.status(200).json(
       new ApiResponse({
         statusCode: 200,
