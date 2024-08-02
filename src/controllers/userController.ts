@@ -3,6 +3,10 @@ import { UserService } from "../services/userService";
 import { User } from "../models/User";
 import ApiResponse from "../utils/ApiResponse";
 import logger from "../utils/logger";
+import jwt from "jsonwebtoken";
+
+const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { username, email, password } = req.body;
@@ -45,13 +49,17 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     logger.success(`Login for user.email ${email} successful`);
 
-    // TODO: Here you would typically generate and return a JWT token
+    // Generate JWT token
+    const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
+      expiresIn: JWT_EXPIRES_IN,
+    });
+
     res.status(200).json(
       new ApiResponse({
         statusCode: 200,
         success: true,
         message: "Login successful",
-        data: null,
+        data: { token },
         errors: [],
       })
     );
