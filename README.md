@@ -18,5 +18,5 @@ A RESTful API for a simple e-commerce application using Node.js and MySQL. This 
 - Develop the Project with Auto-Rebuild and Restart:
 
   ```
-  npm run dev:build
+  npm run dev
   ```
